@@ -20,16 +20,15 @@ The current base idea is a "help people find people for share common interest to
 
 To get an overall understanding, we are currently sort-of using/trying to use:
 
-* [`create-react-app`](https://github.com/facebookincubator/create-react-app)
-* [`react-apollo`](https://github.com/apollographql/react-apollo)
-* [`react-modal`](https://github.com/reactjs/react-modal)
-* [`react-router`](https://github.com/ReactTraining/react-router)
-* [`react-helmet`](https://github.com/nfl/react-helmet)
-* [`styled-components`](https://github.com/styled-components/styled-components)
+* [`create-react-app`](https://github.com/facebookincubator/create-react-app) to bootstrap the development 🚀
+* [`react-apollo`](https://github.com/apollographql/react-apollo) to communicate with the [`Graphcool`](https://www.graph.cool/) backend 📡
+* [`react-modal`](https://github.com/reactjs/react-modal) to add some sweet modals to our site 👻
+* [`react-router`](https://github.com/ReactTraining/react-router) to navigate between pages 🛥
+* [`react-helmet`](https://github.com/nfl/react-helmet) to easily modify the header ⛑
+* [`styled-components`](https://github.com/styled-components/styled-components) to add a consistent UI across the app 💅
 
-And, on the backend:
+And, on the backend, we will probably add this integration:
 
-* [`Graphcool`](https://www.graph.cool/)
 * [`Auth0`](https://www.graph.cool/docs/reference/integrations/auth0-naed3eecie/)
 
 ## How-Tos

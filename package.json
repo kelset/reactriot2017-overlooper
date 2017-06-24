@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "moment": "^2.18.1", // To handle datetimes properly
-    "react": "^15.6.1", // well 😎
-    "react-apollo": "^1.4.2", // To communicate with GraphCool
-    "react-dom": "^15.6.1", // I have no clue about it, it was "embedded" on CRA
-    "react-helmet": "^5.1.3", // For easily change the header of a page via React
-    "react-modal": "^2.0.6", // To have the modals
-    "react-router": "^4.1.1", // To handle navigation
-    "styled-components": "^2.1.0" // For styling
+    "moment": "^2.18.1",
+    "react": "^15.6.1",
+    "react-apollo": "^1.4.2",
+    "react-dom": "^15.6.1",
+    "react-helmet": "^5.1.3",
+    "react-modal": "^2.0.6",
+    "react-router": "^4.1.1",
+    "styled-components": "^2.1.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
