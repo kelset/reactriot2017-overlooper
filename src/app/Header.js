@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FlatOlButton, OlButton } from '../commonui/OlButton';
+import { FlatOlButton, OlButton } from '../commonUI/OlButton';
 import { APP_NAME } from '../constants';
 
 const Wrapper = styled.ul`
@@ -42,7 +42,7 @@ const Header = () =>
       <Link to="/create-event"><FlatOlButton>Create Event</FlatOlButton></Link>
     </HeaderLi>
     <LogoHeaderLi>
-      <Logo>{ APP_NAME }</Logo>
+      <Logo>{APP_NAME}</Logo>
     </LogoHeaderLi>
     <HeaderLi>
       <HeaderRightFlatOlButton>Login</HeaderRightFlatOlButton>

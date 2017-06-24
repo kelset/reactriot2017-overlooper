@@ -6,15 +6,16 @@ import { gql, graphql } from 'react-apollo';
 import Header from '../app/Header';
 import EventHero from './EventHero';
 import EventList from './EventList';
+import { dummyEvents } from './dummyEvents';
 import { CardListContainer, SectionTitle } from './EventStyles';
 
 const Events = ({ data: { allEvents } }) =>
   (<div>
     <Header />
     <EventHero />
-    <CardListContainer className="container">
+    <CardListContainer>
       <SectionTitle>Explore</SectionTitle>
-      <EventList events={allEvents || []} />
+      <EventList events={allEvents || dummyEvents} />
     </CardListContainer>
   </div>);
 

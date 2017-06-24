@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeroBg from './hero-bg.jpg';
-import { OlButton } from '../commonui/OlButton';
+import { OlButton } from '../commonUI/OlButton';
 
 const Wrapper = styled.div`
   background-image: url(${HeroBg});
@@ -35,7 +35,7 @@ const EventHero = () =>
     <Title>Find a teammate</Title>
     <ButtonContainer>
       <OlButtonFullWidth>
-      Sign Up
+        Sign Up
       </OlButtonFullWidth>
     </ButtonContainer>
   </Wrapper>);
