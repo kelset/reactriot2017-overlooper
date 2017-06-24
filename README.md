@@ -16,4 +16,4 @@ We pursuit 3 main objectives during this hackathon:
 
 ### The actual project
 
-The current base idea is a gaming community platform [WIP].
+The current base idea is a "help people find people for share common interest" sort of website - for details about how things are going go check the [roadmap](./ROADMAP.md).
