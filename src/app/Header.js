@@ -17,7 +17,7 @@ const HeaderFlatOlButton = FlatOlButton.extend`
 const Header = () =>
   (<Wrapper className="container">
     <HeaderFlatOlButton>Create Event</HeaderFlatOlButton>
-    <h3>Overlooper</h3>
+    qwer
   </Wrapper>);
 
 export default Header;
