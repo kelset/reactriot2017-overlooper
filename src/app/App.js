@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { ApolloProvider } from 'react-apollo';
@@ -12,6 +12,7 @@ import { store, client } from './store';
 import User from '../user/User';
 import Event from '../event/Event';
 import Question from '../question/Question';
+// import Header from './Header';
 
 import './App.css';
 
@@ -28,13 +29,7 @@ const App = () =>
           <title>Main App</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
-        <ul>
-          <li><Link to="/user">User</Link></li>
-          <li><Link to="/event">Event</Link></li>
-          <li><Link to="/question">Question</Link></li>
-        </ul>
 
-        <hr />
         <div>
           <Route path="/user" component={User} />
           <Route path="/event" component={Event} />
