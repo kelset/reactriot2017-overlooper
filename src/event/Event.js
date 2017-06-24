@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Helmet } from 'react-helmet';
+import { gql, graphql } from 'react-apollo';
 import styled from 'styled-components';
 
 import Header from '../app/Header';
@@ -17,8 +20,7 @@ const SectionTitle = styled.h2`
   padding-bottom: 15px;
 `;
 
-
-const Event = () =>
+const Event = ({ data: { allEvents, refetch } }) =>
   (<div>
     <Helmet>
       <meta charSet="utf-8" />
@@ -27,9 +29,26 @@ const Event = () =>
     </Helmet>
     <Header />
     <EventHero />
+    <p>There are currently {allEvents && allEvents.length} events in the backend</p>
+    <button onClick={() => refetch()}>
+      Refresh
+    </button>
     <CardListContainer className="container">
       <SectionTitle>Explore</SectionTitle>
     </CardListContainer>
   </div>);
 
-export default Event;
+Event.propTypes = {
+  data: PropTypes.object.isRequired
+};
+
+export default graphql(gql`
+  query AllEventsQuery {
+    allEvents {
+      id,
+      title,
+      startDate,
+      endDate
+    }
+  }
+`)(Event);

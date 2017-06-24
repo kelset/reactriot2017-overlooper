@@ -7,7 +7,7 @@ const EventCard = ({ event }) =>
   </div>);
 
 EventCard.propTypes = {
-  event: PropTypes.obj.isRequired
+  event: PropTypes.object.isRequired
 };
 
 export default EventCard;
