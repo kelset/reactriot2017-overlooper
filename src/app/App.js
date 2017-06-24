@@ -1,21 +1,46 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+
+import store from './store';
+
+import User from '../user/User';
+import Event from '../event/Event';
+import Question from '../question/Question';
+
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+// import logo from './logo.svg';
+const history = createHistory();
+
+const App = () =>
+  (<Provider store={store}>
+    {/* ConnectedRouter will use the store from Provider automatically */}
+    <ConnectedRouter history={history}>
+      <div>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Main App</title>
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
+        <ul>
+          <li><Link to="/user">User</Link></li>
+          <li><Link to="/event">Event</Link></li>
+          <li><Link to="/question">Question</Link></li>
+        </ul>
+
+        <hr />
+        <div>
+          <Route path="/user" component={User} />
+          <Route path="/event" component={Event} />
+          <Route path="/question" component={Question} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
-    );
-  }
-}
+    </ConnectedRouter>
+  </Provider>);
 
 export default App;
