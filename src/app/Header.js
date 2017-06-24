@@ -7,11 +7,17 @@ const Wrapper = styled.div`
   width: 100%;
   height: 60px;
   background: #fff;
+  display: inline-block;
+`;
+
+const HeaderFlatOlButton = FlatOlButton.extend`
+  line-height: 60px;
 `;
 
 const Header = () =>
   (<Wrapper className="container">
-    <FlatOlButton>Create Event</FlatOlButton>
+    <HeaderFlatOlButton>Create Event</HeaderFlatOlButton>
+    <h3>Overlooper</h3>
   </Wrapper>);
 
 export default Header;
