@@ -9,10 +9,8 @@ import createHistory from 'history/createBrowserHistory';
 
 import { store, client } from './store';
 
-import User from '../user/User';
-import Event from '../event/Event';
-import Question from '../question/Question';
-// import Header from './Header';
+import UserProfile from '../user/UserProfile';
+import Events from '../event/Events';
 
 import './App.css';
 
@@ -31,9 +29,8 @@ const App = () =>
         </Helmet>
 
         <div>
-          <Route path="/user" component={User} />
-          <Route path="/event" component={Event} />
-          <Route path="/question" component={Question} />
+          <Route path="/" component={Events} />
+          <Route path="/user" component={UserProfile} />
         </div>
       </div>
     </ConnectedRouter>

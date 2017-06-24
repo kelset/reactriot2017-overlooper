@@ -3,24 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Helmet } from 'react-helmet';
 import { gql, graphql } from 'react-apollo';
-import styled from 'styled-components';
 
 import Header from '../app/Header';
 import EventHero from './EventHero';
+import EventList from './EventList';
+import { CardListContainer, SectionTitle } from './EventStyles';
 
-const CardListContainer = styled.div`
-
-`;
-
-const SectionTitle = styled.h2`
-  font-family: Lato;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-`;
-
-const Event = ({ data: { allEvents, refetch } }) =>
+const Events = ({ data: { allEvents } }) =>
   (<div>
     <Helmet>
       <meta charSet="utf-8" />
@@ -29,16 +18,13 @@ const Event = ({ data: { allEvents, refetch } }) =>
     </Helmet>
     <Header />
     <EventHero />
-    <p>There are currently {allEvents && allEvents.length} events in the backend</p>
-    <button onClick={() => refetch()}>
-      Refresh
-    </button>
     <CardListContainer className="container">
       <SectionTitle>Explore</SectionTitle>
+      <EventList events={allEvents || []} />
     </CardListContainer>
   </div>);
 
-Event.propTypes = {
+Events.propTypes = {
   data: PropTypes.object.isRequired
 };
 
@@ -48,7 +34,8 @@ export default graphql(gql`
       id,
       title,
       startDate,
-      endDate
+      endDate,
+      participants
     }
   }
-`)(Event);
+`)(Events);

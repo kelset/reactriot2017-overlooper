@@ -13,4 +13,14 @@ export const Wrapper = styled.section`
     background: papayawhip;
 `;
 
-// Use Title and Wrapper like any other React component – except they're styled!
+export const CardListContainer = styled.div`
+
+`;
+
+export const SectionTitle = styled.h2`
+  font-family: Lato;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+`;
