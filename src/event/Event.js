@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import Header from '../app/Header';
 import EventHero from './EventHero';
-import EventList from './EventList';
 
 const CardListContainer = styled.div`
 
