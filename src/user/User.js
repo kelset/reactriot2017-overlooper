@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
+import { Title, Wrapper } from './UserStyles';
+
 const User = () =>
   (<div>
     <Helmet>
@@ -8,7 +10,9 @@ const User = () =>
       <title>User</title>
       <link rel="canonical" href="http://mysite.com/example" />
     </Helmet>
-    <h2>User</h2>
+    <Wrapper>
+      <Title>User</Title>
+    </Wrapper>
   </div>);
 
 export default User;
