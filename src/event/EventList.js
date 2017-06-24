@@ -14,7 +14,8 @@ const EventCardsWrapper = styled.div`
 const EventList = ({ events }) =>
   (<EventCardsWrapper>
     {events.map(event => <EventCard event={event} />)}
-  </EventCardsWrapper>);
+  </EventCardsWrapper>
+);
 
 EventList.propTypes = {
   events: PropTypes.array.isRequired
