@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 import { ConnectedRouter } from 'react-router-redux';
+
 import createHistory from 'history/createBrowserHistory';
 
-import store from './store';
+import { store, client } from './store';
 
 import User from '../user/User';
 import Event from '../event/Event';
@@ -18,7 +19,7 @@ import './App.css';
 const history = createHistory();
 
 const App = () =>
-  (<Provider store={store}>
+  (<ApolloProvider store={store} client={client}>
     {/* ConnectedRouter will use the store from Provider automatically */}
     <ConnectedRouter history={history}>
       <div>
@@ -41,6 +42,6 @@ const App = () =>
         </div>
       </div>
     </ConnectedRouter>
-  </Provider>);
+  </ApolloProvider>);
 
 export default App;

@@ -1,22 +1,37 @@
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createHistory from 'history/createBrowserHistory';
+
+import { ApolloClient, createNetworkInterface } from 'react-apollo';
 
 import reducers from './reducers';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
 
-// Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history);
+export const client = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: 'https://api.graph.cool/simple/v1/cj4b4erba2cdh0142bmipr8hf'
+  })
+});
 
 // Add the reducer to your store on the `router` key
 // Also apply our middleware for navigating
-const store = createStore(
+export const store = createStore(
   combineReducers({
     ...reducers,
+    apollo: client.reducer(),
     router: routerReducer
   }),
-  applyMiddleware(middleware)
+  {}, // initial state
+  compose(
+    applyMiddleware(
+      routerMiddleware(history), // intercepting and dispatching navigation actions
+      client.middleware() // the apollo middleware
+    ),
+    // If you are using the devToolsExtension, you can add it here also
+    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : f => f
+  )
 );
-export default store;
