@@ -12,6 +12,8 @@ import { store, client } from './store';
 import UserProfile from '../user/UserProfile';
 import EventProfile from '../event/EventProfile';
 import Events from '../event/Events';
+import Header from '../app/Header';
+import CustomModal from '../modal/CustomModal';
 
 import './App.css';
 
@@ -28,6 +30,8 @@ const App = () =>
         </Helmet>
 
         <div>
+          <CustomModal />
+          <Header />
           <Route path="/" component={Events} />
           <Route path="/user" component={UserProfile} />
           <Route path="/event" component={EventProfile} />

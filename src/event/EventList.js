@@ -13,7 +13,7 @@ const EventCardsWrapper = styled.div`
 
 const EventList = ({ events }) =>
   (<EventCardsWrapper>
-    {events.map(event => <EventCard event={event} />)}
+    {events.map(event => <EventCard key={event.id || Math.random()} event={event} />)}
   </EventCardsWrapper>);
 
 EventList.propTypes = {
