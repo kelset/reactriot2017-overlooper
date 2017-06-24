@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import Header from '../app/Header';
+import EventHero from './EventHero';
 
 const Event = () =>
   (<div>
@@ -11,6 +12,7 @@ const Event = () =>
       <link rel="canonical" href="http://mysite.com/example" />
     </Helmet>
     <Header />
+    <EventHero />
   </div>);
 
 export default Event;
