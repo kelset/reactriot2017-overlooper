@@ -14,6 +14,7 @@ import EventProfile from '../event/EventProfile';
 import Events from '../event/Events';
 import Header from '../app/Header';
 import CustomModal from '../modal/CustomModal';
+import CreateEvent from '../create-event/CreateEvent';
 
 import './App.css';
 
@@ -32,9 +33,10 @@ const App = () =>
         <div>
           <CustomModal />
           <Header />
-          <Route path="/" component={Events} />
+          <Route exact path="/" component={Events} />
           <Route path="/user" component={UserProfile} />
           <Route path="/event" component={EventProfile} />
+          <Route path="/create-event" component={CreateEvent} />
         </div>
       </div>
     </ConnectedRouter>
