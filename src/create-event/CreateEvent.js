@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Question = () =>
+const CreateEvent = () =>
   (<div>
     <h2>Question</h2>
   </div>);
 
-export default Question;
+export default CreateEvent;

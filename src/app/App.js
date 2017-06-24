@@ -12,6 +12,7 @@ import { store, client } from './store';
 import UserProfile from '../user/UserProfile';
 import EventProfile from '../event/EventProfile';
 import Events from '../event/Events';
+import CreateEvent from '../create-event/CreateEvent';
 
 import './App.css';
 
@@ -28,9 +29,10 @@ const App = () =>
         </Helmet>
 
         <div>
-          <Route path="/" component={Events} />
+          <Route exact path="/" component={Events} />
           <Route path="/user" component={UserProfile} />
           <Route path="/event" component={EventProfile} />
+          <Route path="/create-event" component={CreateEvent} />
         </div>
       </div>
     </ConnectedRouter>
