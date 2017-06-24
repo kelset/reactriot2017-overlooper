@@ -5,7 +5,7 @@ const User = () =>
   (<div>
     <Helmet>
       <meta charSet="utf-8" />
-      <title>Event</title>
+      <title>User</title>
       <link rel="canonical" href="http://mysite.com/example" />
     </Helmet>
     <h2>User</h2>

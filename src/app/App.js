@@ -28,7 +28,7 @@ const App = () =>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <ul>
-          <li><Link to="/">User</Link></li>
+          <li><Link to="/user">User</Link></li>
           <li><Link to="/event">Event</Link></li>
           <li><Link to="/question">Question</Link></li>
         </ul>
