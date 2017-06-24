@@ -29,9 +29,7 @@ const App = () =>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
 
-        <Header />
-
-        <div className="container">
+        <div>
           <Route path="/user" component={User} />
           <Route path="/event" component={Event} />
           <Route path="/question" component={Question} />

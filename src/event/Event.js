@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
+import Header from '../app/Header';
+
 const Event = () =>
   (<div>
     <Helmet>
@@ -8,7 +10,7 @@ const Event = () =>
       <title>Event</title>
       <link rel="canonical" href="http://mysite.com/example" />
     </Helmet>
-    <h2>Event</h2>
+    <Header />
   </div>);
 
 export default Event;
