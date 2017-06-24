@@ -15,6 +15,17 @@ export const client = new ApolloClient({
   })
 });
 
+const middlewares = [
+  routerMiddleware(history), // intercepting and dispatching navigation actions
+  client.middleware() // the apollo middleware
+];
+
+if (process.env.NODE_ENV === 'development') {
+  const { logger } = require('redux-logger');
+
+  middlewares.push(logger);
+}
+
 // Add the reducer to your store on the `router` key
 // Also apply our middleware for navigating
 export const store = createStore(
@@ -25,10 +36,7 @@ export const store = createStore(
   }),
   {}, // initial state
   compose(
-    applyMiddleware(
-      routerMiddleware(history), // intercepting and dispatching navigation actions
-      client.middleware() // the apollo middleware
-    ),
+    applyMiddleware(...middlewares),
     // If you are using the devToolsExtension, you can add it here also
     typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
