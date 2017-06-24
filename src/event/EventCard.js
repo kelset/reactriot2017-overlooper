@@ -60,7 +60,7 @@ const FullWidthOlButton = OlButton.extend`
 
 const EventCard = ({ event }) =>
   (<Wrapper>
-    <CardImage src="http://placehold.it/900" alt={event.name} />
+    <CardImage src={event.image} alt={event.title} />
     <CardBodyWrapper>
       <Title>{event.title}</Title>
       <Description>{event.description}</Description>

@@ -29,7 +29,9 @@ export default graphql(gql`
       id,
       title,
       startDate,
-      endDate
+      endDate,
+      image,
+      description
     }
   }
 `)(Events);
