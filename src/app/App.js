@@ -14,17 +14,15 @@ import Events from '../event/Events';
 
 import './App.css';
 
-// import logo from './logo.svg';
 const history = createHistory();
 
 const App = () =>
   (<ApolloProvider store={store} client={client}>
-    {/* ConnectedRouter will use the store from Provider automatically */}
     <ConnectedRouter history={history}>
       <div>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Main App</title>
+          <title>Overlooper</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
 
