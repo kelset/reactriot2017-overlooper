@@ -24,6 +24,10 @@ To get an overall understanding, we are currently sort-of using/trying to use:
 * [`react-apollo`](https://github.com/apollographql/react-apollo)
 * [`react-modal`](https://github.com/reactjs/react-modal)
 * [`react-router`](https://github.com/ReactTraining/react-router)
+* [`react-helmet`](https://github.com/nfl/react-helmet)
+* [`styled-components`](https://github.com/styled-components/styled-components)
+
+And, on the backend:
 
 * [`Graphcool`](https://www.graph.cool/)
 * [`Auth0`](https://www.graph.cool/docs/reference/integrations/auth0-naed3eecie/)
