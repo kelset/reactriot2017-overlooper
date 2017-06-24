@@ -10,7 +10,7 @@ import EventHero from './EventHero';
 import EventList from './EventList';
 
 const CardListContainer = styled.div`
-
+  margin: 0 10%;
 `;
 
 const SectionTitle = styled.h2`
@@ -68,7 +68,7 @@ const Event = ({ data: { allEvents, refetch } }) =>
     </Helmet>
     <Header />
     <EventHero />
-    <CardListContainer className="container">
+    <CardListContainer>
       <SectionTitle>Explore</SectionTitle>
       <EventList events={dummyEvents} />
     </CardListContainer>
