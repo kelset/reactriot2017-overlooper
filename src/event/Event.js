@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import Header from '../app/Header';
 import EventHero from './EventHero';
+import EventList from './EventList';
 
 const CardListContainer = styled.div`
 
@@ -20,6 +21,44 @@ const SectionTitle = styled.h2`
   padding-bottom: 15px;
 `;
 
+const dummyEvents = [
+  {
+    name: 'React Riot',
+    desc: `React Riot is an online hackathon.
+Teams of up to 4 people compete over a
+48 hour period to build the best app they can,
+using React JS.`,
+  },
+  {
+    name: 'React Riot',
+    desc: `React Riot is an online hackathon.
+Teams of up to 4 people compete over a
+48 hour period to build the best app they can,
+using React JS.`,
+  },
+  {
+    name: 'React Riot',
+    desc: `React Riot is an online hackathon.
+Teams of up to 4 people compete over a
+48 hour period to build the best app they can,
+using React JS.`,
+  },
+  {
+    name: 'React Riot',
+    desc: `React Riot is an online hackathon.
+Teams of up to 4 people compete over a
+48 hour period to build the best app they can,
+using React JS.`,
+  },
+  {
+    name: 'React Riot',
+    desc: `React Riot is an online hackathon.
+Teams of up to 4 people compete over a
+48 hour period to build the best app they can,
+using React JS.`,
+  },
+];
+
 const Event = ({ data: { allEvents, refetch } }) =>
   (<div>
     <Helmet>
@@ -29,12 +68,9 @@ const Event = ({ data: { allEvents, refetch } }) =>
     </Helmet>
     <Header />
     <EventHero />
-    <p>There are currently {allEvents && allEvents.length} events in the backend</p>
-    <button onClick={() => refetch()}>
-      Refresh
-    </button>
     <CardListContainer className="container">
       <SectionTitle>Explore</SectionTitle>
+      <EventList events={dummyEvents} />
     </CardListContainer>
   </div>);
 
