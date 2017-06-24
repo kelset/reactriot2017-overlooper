@@ -1,1 +1,1 @@
-const APP_NAME = 'Overlooper'; // for now :smile:
+export const APP_NAME = 'Overlooper'; // for now :smile:

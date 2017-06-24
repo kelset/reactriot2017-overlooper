@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlatOlButton, OlButton } from '../commonui/OlButton';
+import { APP_NAME } from '../constants';
 
 const Wrapper = styled.ul`
   width: 100%;
@@ -15,10 +16,6 @@ const Wrapper = styled.ul`
 
 const HeaderRightFlatOlButton = FlatOlButton.extend`
   margin-right: 15px;
-`;
-
-const HeaderOlButton = OlButton.extend`
-
 `;
 
 const HeaderLi = styled.li`
@@ -42,14 +39,14 @@ const Logo = styled.h1`
 const Header = () =>
   (<Wrapper className="container">
     <HeaderLi>
-      <FlatOlButton>Create Event</FlatOlButton>
+      <Link to="/create-event"><FlatOlButton>Create Event</FlatOlButton></Link>
     </HeaderLi>
     <LogoHeaderLi>
-      <Logo>Overlooper</Logo>
+      <Logo>{ APP_NAME }</Logo>
     </LogoHeaderLi>
     <HeaderLi>
       <HeaderRightFlatOlButton>Login</HeaderRightFlatOlButton>
-      <HeaderOlButton>Sign Up</HeaderOlButton>
+      <OlButton>Sign Up</OlButton>
     </HeaderLi>
   </Wrapper>);
 
