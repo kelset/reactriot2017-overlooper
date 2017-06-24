@@ -16,9 +16,9 @@ We pursuit 3 main objectives during this hackathon:
 
 ## The actual project
 
-The current base idea is a "help people find people for share common interest" sort of website - for details about how things are going go check the [roadmap](./ROADMAP.md).
+The current base idea is a "help people find people for share common interest to participate together to an event" sort of website.
 
-To get an overall understanding, we are currently using:
+To get an overall understanding, we are currently sort-of using/trying to use:
 
 * [`create-react-app`](https://github.com/facebookincubator/create-react-app)
 * [`react-apollo`](https://github.com/apollographql/react-apollo)
