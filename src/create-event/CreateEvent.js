@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import CreateEventInfoForm from './CreateEventInfoForm';
 
+const mapStateToProps = state => state.createEvent;
 const CreateEvent = () =>
-  (<div>
-    <h2>Question</h2>
+  (<div className="container">
+    <CreateEventInfoForm />
   </div>);
 
-export default CreateEvent;
+export default connect(mapStateToProps, () => {})(CreateEvent);

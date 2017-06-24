@@ -19,3 +19,7 @@ export const OlButton = BaseOlButton.extend`
   padding: 10px 10px;
   border-radius: 5px;
 `;
+
+export const OlButtonFullWidth = OlButton.extend`
+  width: 100%;
+`;
