@@ -23,7 +23,7 @@ Events.propTypes = {
 
 export default graphql(gql`
   query AllEventsQuery {
-    allEvents {
+    allEvents (orderBy: createdAt_DESC){
       id,
       title,
       startDate,
