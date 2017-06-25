@@ -23,6 +23,7 @@ class EventProfile extends React.PureComponent {
       editMode: false,
       currentUserParticipated: true,
       hasEvent: props.hasEvent,
+      hasError: false,
       event: props.event,
       data: {},
     };
@@ -57,12 +58,23 @@ class EventProfile extends React.PureComponent {
         console.log('got response', resp);
         this.setState({ event: resp.data.Event, hasEvent: true });
       })
-      .catch(err => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        this.setState({ hasError: true });
+      });
     }
   }
 
   render() {
     const { editMode, event } = this.state;
+
+    if (this.state.hasError) {
+      return (
+        <SingleEventWrapper>
+          <div> Sorry, event not found. </div>
+        </SingleEventWrapper>
+      );
+    }
 
     if (!this.state.hasEvent) {
       return (
