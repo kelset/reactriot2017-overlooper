@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
-import { Title, Wrapper } from './EventStyles';
+import { Title } from './EventStyles';
 
 class EventProfile extends React.PureComponent {
   constructor(props) {
@@ -25,12 +25,9 @@ class EventProfile extends React.PureComponent {
           <title>{event.title}</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
-        <Wrapper>
+        <div>
           <Title>{event.title}</Title>
-          {editMode
-            ? <p>You can see this line only if you are the owner</p>
-            : <p>This event is owned by {event.owner.name}</p>}
-        </Wrapper>
+        </div>
       </div>
     );
   }

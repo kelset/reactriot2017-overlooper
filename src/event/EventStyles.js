@@ -13,7 +13,7 @@ export const SectionTitle = styled.h2`
   padding-bottom: 15px;
 `;
 
-export const Wrapper = styled.div`
+export const CardWrapper = styled.div`
   width: 23%;
   margin: 0 1%;
   border: 1px solid #c1c1c1;

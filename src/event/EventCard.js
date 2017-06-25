@@ -8,7 +8,7 @@ import { setEvent } from './eventActions';
 
 import { FlatOlButton } from '../commonUI/OlButton';
 import {
-  Wrapper,
+  CardWrapper,
   CardImage,
   CardBodyWrapper,
   Title,
@@ -29,7 +29,7 @@ class EventCard extends React.PureComponent {
   render() {
     const { event } = this.props;
     return (
-      <Wrapper>
+      <CardWrapper>
         <CardImage
           onClick={() => this.navigateToEvent(event)}
           src={event.image}
@@ -50,7 +50,7 @@ class EventCard extends React.PureComponent {
             <FullWidthOlButton>Participate Now</FullWidthOlButton>
           </ActionContainer>
         </CardBodyWrapper>
-      </Wrapper>
+      </CardWrapper>
     );
   }
 }
