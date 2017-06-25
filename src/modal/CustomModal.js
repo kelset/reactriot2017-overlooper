@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Modal from 'react-modal';
+import { closeModal } from './modalActions';
 
 const customStyles = {
   content: {
@@ -15,17 +16,25 @@ const customStyles = {
   }
 };
 
-const CustomModal = ({ modal }) =>
-  (<Modal isOpen={modal.isOpen} style={customStyles} contentLabel={modal.title}>
+
+const CustomModal = ({ modal, dispatch }) =>
+  (<Modal
+    isOpen={modal.isOpen}
+    style={customStyles}
+    contentLabel={modal.title}
+    onRequestClose={() => dispatch(closeModal())}
+  >
     {modal.children}
   </Modal>);
 
 CustomModal.propTypes = {
-  modal: PropTypes.object
+  modal: PropTypes.object,
+  dispatch: PropTypes.func,
 };
 
 const mapStateToProps = store => ({
-  modal: store.modal
+  modal: store.modal,
+  dispatch: store.dispatch,
 });
 
 export default connect(mapStateToProps)(CustomModal);

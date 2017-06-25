@@ -8,7 +8,7 @@ import { setEvent } from './eventActions';
 
 import { FlatOlButton } from '../commonUI/OlButton';
 import {
-  Wrapper,
+  CardWrapper,
   CardImage,
   CardBodyWrapper,
   Title,
@@ -23,14 +23,18 @@ import {
 class EventCard extends React.PureComponent {
   navigateToEvent(event) {
     this.props.setEvent(event);
-    this.props.history.push({ pathname: '/event' });
+    this.props.history.push({ pathname: `/event/${event.id}` });
   }
 
   render() {
     const { event } = this.props;
     return (
-      <Wrapper>
-        <CardImage src={event.image} alt={event.title} />
+      <CardWrapper>
+        <CardImage
+          onClick={() => this.navigateToEvent(event)}
+          src={event.image}
+          alt={event.title}
+        />
         <CardBodyWrapper>
           <FlatOlButton onClick={() => this.navigateToEvent(event)}>
             <Title>{event.title}</Title>
@@ -46,7 +50,7 @@ class EventCard extends React.PureComponent {
             <FullWidthOlButton>Participate Now</FullWidthOlButton>
           </ActionContainer>
         </CardBodyWrapper>
-      </Wrapper>
+      </CardWrapper>
     );
   }
 }

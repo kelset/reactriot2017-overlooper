@@ -9,6 +9,7 @@ export const Wrapper = styled.ul`
   list-style-type: none;
   flex-direction: row;
   justify-content: space-between;
+  border-bottom: 1px solid #f5f5f5;
 `;
 
 export const HeaderRightFlatOlButton = FlatOlButton.extend`
