@@ -13,6 +13,7 @@ import {
 } from './EventStyles';
 
 import { OlButton } from '../commonUI/OlButton';
+import EventUserList from './EventUserList';
 
 const dummyEvent = {
   title: 'React Riot',
@@ -20,7 +21,21 @@ const dummyEvent = {
 Teams of up to 4 people compete over a
 48 hour period to build the best app they can,
 using React JS.`,
-  image: 'http://placehold.it/400'
+  image: 'http://placehold.it/400',
+  users: [
+    {
+      image: 'http://placehold.it/300',
+      name: '@erdogmusergun',
+    },
+    {
+      image: 'http://placehold.it/400',
+      name: '@kelset',
+    },
+    {
+      image: 'http://placehold.it/300',
+      name: '@ergun1017',
+    }
+  ]
 };
 
 class EventProfile extends React.PureComponent {
@@ -28,14 +43,13 @@ class EventProfile extends React.PureComponent {
     super(props);
     this.state = {
       editMode: false,
-      currentUserParticipated: false,
+      currentUserParticipated: true,
     };
   }
 
   render() {
     const { editMode } = this.state;
     const { event } = this.props;
-    console.log(event);
     return (
       <div>
         <Helmet>
@@ -48,7 +62,9 @@ class EventProfile extends React.PureComponent {
           <SingleEventBodyWrapper>
             <SingleEventTitle>{event.title}</SingleEventTitle>
             <SingleEventDescription>{event.description}</SingleEventDescription>
-            {!this.state.currentUserParticipated ? <OlButton>Participate Now</OlButton> : ''}
+            { !this.state.currentUserParticipated ?
+              <OlButton>Participate Now</OlButton> :
+              <EventUserList users={event.users} /> }
           </SingleEventBodyWrapper>
         </SingleEventWrapper>
       </div>
