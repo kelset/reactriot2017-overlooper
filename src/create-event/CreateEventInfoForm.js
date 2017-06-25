@@ -22,7 +22,7 @@ const CreateEventInfoForm = () =>
         <InputTitle type="text" placeholder="Title of the event" />
         <InputDesc placeholder="Description of the event" />
         <ActionWrapper>
-          <OlButtonFullWidth>Next</OlButtonFullWidth>
+          <OlButtonFullWidth onPress={() => console.log('pressed!')}>Next</OlButtonFullWidth>
         </ActionWrapper>
       </div>
     </FormWrapper>

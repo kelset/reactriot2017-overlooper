@@ -5,7 +5,7 @@ import createHistory from 'history/createBrowserHistory';
 import { ApolloClient, createNetworkInterface } from 'react-apollo';
 
 import modal from '../modal/modalReducer';
-import CreateEventReducer from '../create-event/CreateEventReducer';
+import event from '../event/eventReducer';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -31,7 +31,7 @@ const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
 const reducers = combineReducers({
   modal,
-  CreateEventReducer,
+  event,
   apollo: client.reducer(),
   router: routerReducer
 });
