@@ -67,3 +67,30 @@ export const ActionContainer = styled.div`
 export const FullWidthOlButton = OlButton.extend`
   width: 100%;
 `;
+
+export const SingleEventWrapper = styled.div`
+  width: 50%;
+  height: 500px;
+  margin: 0 25%;
+  background: #fff;
+  border: 1px solid #f5f5f5;
+`;
+
+export const SingleEventImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 300px;
+`;
+
+export const SingleEventBodyWrapper = styled.div`
+  padding: 15px 20px;
+`;
+
+export const SingleEventTitle = Title.extend`
+  font-size: 18px;
+`;
+
+export const SingleEventDescription = Description.extend`
+  font-size: 16px;
+`;
