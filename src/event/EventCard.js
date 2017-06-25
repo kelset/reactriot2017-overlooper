@@ -30,7 +30,11 @@ class EventCard extends React.PureComponent {
     const { event } = this.props;
     return (
       <Wrapper>
-        <CardImage src={event.image} alt={event.title} />
+        <CardImage
+          onClick={() => this.navigateToEvent(event)}
+          src={event.image}
+          alt={event.title}
+        />
         <CardBodyWrapper>
           <FlatOlButton onClick={() => this.navigateToEvent(event)}>
             <Title>{event.title}</Title>

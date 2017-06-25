@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
 export const CardImage = styled.img`
   width: 100%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const CardBodyWrapper = styled.div`
