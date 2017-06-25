@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { setEvent } from './eventActions';
+import { setModal, closeModal } from '../modal/modalActions';
 
 import { FlatOlButton } from '../commonUI/OlButton';
+import ParticipateModal from './ParticipateModal';
 import {
   CardWrapper,
   CardImage,
@@ -21,9 +23,31 @@ import {
 } from './EventStyles';
 
 class EventCard extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldShowAction: true,
+    };
+    this.handleParticipateClick = this.handleParticipateClick.bind(this);
+  }
+
   navigateToEvent(event) {
     this.props.setEvent(event);
     this.props.history.push({ pathname: `/event/${event.id}` });
+  }
+
+  openParticipateNowModal(event) {
+    console.log(event);
+    this.props.setModal({
+      children: (
+        <ParticipateModal event={event} />
+      )
+    });
+  }
+
+  handleParticipateClick() {
+    const { event } = this.props;
+    this.openParticipateNowModal(event);
   }
 
   render() {
@@ -59,9 +83,15 @@ class EventCard extends React.PureComponent {
           </SeekingPeopleContainer>
           {user.auth0IdToken
             ? <ActionContainer>
-              <FullWidthOlButton>Participate Now</FullWidthOlButton>
+              <FullWidthOlButton
+                onClick={this.handleParticipateClick}
+              >Participate Now</FullWidthOlButton>
             </ActionContainer>
-            : null}
+            : <ActionContainer>
+              <FullWidthOlButton
+                onClick={this.handleParticipateClick}
+              >Participate Now</FullWidthOlButton>
+            </ActionContainer>}
         </CardBodyWrapper>
       </CardWrapper>
     );
@@ -72,7 +102,8 @@ EventCard.propTypes = {
   event: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  setEvent: PropTypes.func.isRequired
+  setEvent: PropTypes.func.isRequired,
+  setModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -82,7 +113,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setEvent
+      setEvent,
+      setModal
     },
     dispatch
   );

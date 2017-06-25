@@ -78,7 +78,6 @@ class Header extends React.PureComponent {
 
   createActualEvent({ owner, title, description, image }) {
     const { questionsToAsk } = this.props.event;
-    console.log('questions', questionsToAsk);
     const variables = {
       ownerId: owner.id,
       title,
