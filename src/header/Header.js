@@ -8,11 +8,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Auth0Lock from 'auth0-lock';
 
-import { setModal } from '../modal/modalActions';
+import { setModal, closeModal } from '../modal/modalActions';
 import { createEvent } from '../event/eventActions';
 import { setUser, login, logout } from '../user/userActions';
 
 import CreateEventForm from '../create-event/CreateEventForm';
+import CreateUserForm from '../create-user/CreateUserForm';
 import { FlatOlButton, OlButton } from '../commonUI/OlButton';
 
 import { APP_NAME } from '../constants';
@@ -33,18 +34,33 @@ class Header extends React.PureComponent {
     this._lock.on('authenticated', (authResult) => {
       this.props.login({ auth0IdToken: authResult.idToken });
       window.localStorage.setItem('auth0IdToken', authResult.idToken);
-      // location.reload();
+
+      // now I need to create the actual user
+      this.openCreateUserModal();
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data.loading && nextProps.data.user) {
-      // this way I'll propagate the login to the store
-      this.props.setUser({ user: nextProps.data.user });
-    }
+  createActualUser({ name, avatar }) {
+    const variables = {
+      idToken: window.localStorage.getItem('auth0IdToken'),
+      avatar,
+      name
+    };
+
+    this.props
+      .createUser({ variables })
+      .then(() => {
+        this.props.closeModal();
+        this.props.setUser({ user: variables });
+        this.props.history.replace('/');
+      })
+      .catch((e) => {
+        console.error(e);
+        this.props.history.replace('/');
+      });
   }
 
-  openEventModal() {
+  openCreateEventModal() {
     this.props.setModal({
       children: (
         <CreateEventForm createEvent={this.props.createEvent} currentUser={this.props.user} />
@@ -52,10 +68,16 @@ class Header extends React.PureComponent {
     });
   }
 
+  openCreateUserModal() {
+    this.props.setModal({
+      children: <CreateUserForm createUser={this.createActualUser.bind(this)} />
+    });
+  }
+
   _logout() {
     this.props.logout();
     window.localStorage.removeItem('auth0IdToken');
-    // location.reload();
+    this.props.history.replace('/');
   }
 
   render() {
@@ -65,7 +87,7 @@ class Header extends React.PureComponent {
       <Wrapper className="container">
         <HeaderLi>
           {user.auth0IdToken
-            ? <FlatOlButton onClick={() => this.openEventModal()}>Create Event</FlatOlButton>
+            ? <FlatOlButton onClick={() => this.openCreateEventModal()}>Create Event</FlatOlButton>
             : <div />}
         </HeaderLi>
         <LogoHeaderLi>
@@ -100,9 +122,11 @@ class Header extends React.PureComponent {
 
 Header.propTypes = {
   user: PropTypes.object,
-  data: PropTypes.object.isRequired,
-  // location: PropTypes.object.isRequired,
+  // data: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  createUser: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   createEvent: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
@@ -117,6 +141,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       setModal,
+      closeModal,
       createEvent,
       setUser,
       login,
@@ -124,6 +149,14 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
+const createUser = gql`
+  mutation ($idToken: String!, $name: String!, $avatar: String!){
+    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, avatar: $avatar) {
+      id
+    }
+  }
+`;
 
 const userQuery = gql`
   query userQuery {
@@ -138,6 +171,8 @@ const userQuery = gql`
   }
 `;
 
-export default graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(
-  connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+export default graphql(createUser, { name: 'createUser' })(
+  graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(
+    connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+  )
 );
