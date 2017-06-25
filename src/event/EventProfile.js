@@ -29,7 +29,7 @@ class EventProfile extends React.PureComponent {
           <Title>{event.title}</Title>
           {editMode
             ? <p>You can see this line only if you are the owner</p>
-            : <p>This event is owned by {event.owner}</p>}
+            : <p>This event is owned by {event.owner.name}</p>}
         </Wrapper>
       </div>
     );

@@ -29,7 +29,15 @@ export default graphql(gql`
       startDate,
       endDate,
       image,
-      description
+      description,
+      owner {
+        id,
+        name
+      },
+      participants {
+        id,
+        name
+      }
     }
   }
 `)(Events);

@@ -11,7 +11,7 @@ const Header = () =>
       <Link to="/create-event"><FlatOlButton>Create Event</FlatOlButton></Link>
     </HeaderLi>
     <LogoHeaderLi>
-      <Logo>{APP_NAME}</Logo>
+      <Link to="/"><Logo>{APP_NAME}</Logo></Link>
     </LogoHeaderLi>
     <HeaderLi>
       <HeaderRightFlatOlButton>Login</HeaderRightFlatOlButton>
