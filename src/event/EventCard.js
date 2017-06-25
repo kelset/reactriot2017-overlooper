@@ -28,6 +28,7 @@ class EventCard extends React.PureComponent {
 
   render() {
     const { event, user } = this.props;
+    console.log(event);
     return (
       <CardWrapper>
         <CardImage
@@ -41,10 +42,20 @@ class EventCard extends React.PureComponent {
           </FlatOlButton>
           <Description>{event.description}</Description>
           <SeekingPeopleContainer>
-            <SeekingPeopleImg src="http://placehold.it/300" alt="user-name" />
-            <SeekingPeopleImg src="http://placehold.it/300" alt="user-name" />
-            <SeekingPeopleImg src="http://placehold.it/300" alt="user-name" />
-            <SeekingPeopleText>and 5 more</SeekingPeopleText>
+            { event.participants.length >= 3
+              ? [...Array(3)]
+                .map((e, i) => (<SeekingPeopleImg
+                  src={event.participants[i].avatar}
+                  alt="user-name"
+                />))
+                  : null }
+            { event.participants.length > 3
+            ? <SeekingPeopleText> { event.participants.length - 3} more</SeekingPeopleText>
+            : null }
+
+            { event.participants.length < 3 && event.participants.length > 0
+            ? <SeekingPeopleText> { event.participants.length } people</SeekingPeopleText>
+            : null }
           </SeekingPeopleContainer>
           {user.auth0IdToken
             ? <ActionContainer>

@@ -5,17 +5,31 @@ import { gql, graphql } from 'react-apollo';
 
 import EventHero from './EventHero';
 import EventList from './EventList';
-import { dummyEvents } from './dummyEvents';
 import { CardListContainer, SectionTitle } from './EventStyles';
 
-const Events = ({ data: { allEvents } }) =>
-  (<div>
-    <EventHero />
-    <CardListContainer>
-      <SectionTitle>Explore</SectionTitle>
-      <EventList events={allEvents || dummyEvents} />
-    </CardListContainer>
-  </div>);
+const Events = ({ data }) => {
+  console.log(data);
+  const allEvents = data.allEvents;
+  if (data.networkStatus < 7) {
+    return (
+      <div>
+        <EventHero />
+        <CardListContainer>
+          <SectionTitle>Loading ...</SectionTitle>
+        </CardListContainer>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <EventHero />
+      <CardListContainer>
+        <SectionTitle>Explore</SectionTitle>
+        <EventList events={allEvents} />
+      </CardListContainer>
+    </div>);
+};
 
 Events.propTypes = {
   data: PropTypes.object.isRequired
@@ -51,7 +65,8 @@ export default graphql(gql`
       },
       participants {
         id,
-        name
+        name,
+        avatar
       }
     }
   }

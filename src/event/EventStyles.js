@@ -22,6 +22,7 @@ export const CardWrapper = styled.div`
 
 export const CardImage = styled.img`
   width: 100%;
+  max-height: 400px;
   object-fit: cover;
   cursor: pointer;
 `;
@@ -70,7 +71,7 @@ export const FullWidthOlButton = OlButton.extend`
 
 export const SingleEventWrapper = styled.div`
   width: 50%;
-  height: 500px;
+  min-height: 500px;
   margin: 0 25%;
   background: #fff;
   border: 1px solid #f5f5f5;

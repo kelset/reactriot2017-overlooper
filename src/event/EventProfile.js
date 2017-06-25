@@ -50,7 +50,8 @@ class EventProfile extends React.PureComponent {
               },
               participants {
                 id,
-                name
+                name,
+                avatar
               }
             }
           }

@@ -34,7 +34,7 @@ class EventUserList extends React.PureComponent {
     return (<UserListWrapper>
       { users.map(user => (
         <SeekingPeopleWrapper onClick={() => this.openUserModal(user)} key={user.name}>
-          <SeekingPeopleImg src={user.image} alt={user.name} /> { user.name }
+          <SeekingPeopleImg src={user.avatar} alt={user.name} /> { user.name }
         </SeekingPeopleWrapper>
       )) }
     </UserListWrapper>);
