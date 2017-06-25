@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
 import { Title, Wrapper } from './EventStyles';
@@ -39,4 +40,8 @@ EventProfile.propTypes = {
   event: PropTypes.object.isRequired
 };
 
-export default EventProfile;
+const mapStateToProps = state => ({
+  event: state.event
+});
+
+export default connect(mapStateToProps)(EventProfile);

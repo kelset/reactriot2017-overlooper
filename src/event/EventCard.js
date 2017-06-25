@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { setEvent } from './eventActions';
 
@@ -22,6 +23,7 @@ import {
 class EventCard extends React.PureComponent {
   navigateToEvent(event) {
     this.props.setEvent(event);
+    this.props.history.push({ pathname: '/event' });
   }
 
   render() {
@@ -51,6 +53,7 @@ class EventCard extends React.PureComponent {
 
 EventCard.propTypes = {
   event: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   setEvent: PropTypes.func.isRequired
 };
 
@@ -66,4 +69,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventCard);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EventCard));
