@@ -31,12 +31,28 @@ class Header extends React.PureComponent {
   }
 
   componentDidMount() {
+    // This code is commented because I couldn't figure out a way to make it work
+    // redirect if user is logged in or did not finish Auth0 Lock dialog
+    // if (this.props.data.user || window.localStorage.getItem('auth0IdToken') !== null) {
+    //   console.warn('already logged in');
+    //   this.props.setUser({ user: this.props.data.user });
+    //   this.props.history.replace('/');
+    // }
+
     this._lock.on('authenticated', (authResult) => {
       this.props.login({ auth0IdToken: authResult.idToken });
       window.localStorage.setItem('auth0IdToken', authResult.idToken);
+      // Need to check user existence
 
-      // now I need to create the actual user
-      this.openCreateUserModal();
+      this.props.data.refetch().then((result) => {
+        if (result.data.user) {
+          this.props.setUser({ user: result.data.user });
+          this.props.history.replace('/');
+        } else {
+          // now I need to create the actual user
+          this.openCreateUserModal();
+        }
+      });
     });
   }
 
@@ -122,9 +138,10 @@ class Header extends React.PureComponent {
 
 Header.propTypes = {
   user: PropTypes.object,
-  // data: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   createUser: PropTypes.func.isRequired,
+  userQuery: PropTypes.func,
   setModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   createEvent: PropTypes.func.isRequired,
@@ -166,7 +183,11 @@ const userQuery = gql`
       eventsOwned {
         id,
         title
-      }
+      },
+      attendingEvents {
+        id,
+        title
+      },
     }
   }
 `;
