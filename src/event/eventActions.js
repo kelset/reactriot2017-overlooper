@@ -1,7 +1,7 @@
 import ActionTypes from '../constants';
 
 export const setEvent = event => ({
-  type: ActionTypes.ADD_QUESTION,
+  type: ActionTypes.SET_EVENT,
   event
 });
 
