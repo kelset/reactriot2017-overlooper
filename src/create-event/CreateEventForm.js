@@ -11,7 +11,7 @@ import {
   InputDesc,
   ActionWrapper,
   AddQuestionWrapper,
-  AddQuestionButton,
+  AddQuestionButton
 } from './CreateEventStyles';
 import AddQuestionComponent from './AddQuestionComponent';
 import { OlButtonFullWidth } from '../commonUI/OlButton';
@@ -23,7 +23,7 @@ class CreateEventForm extends React.PureComponent {
       title: '',
       desc: '',
       img: 'http://placehold.it/300',
-      numberOfQuestions: 1,
+      numberOfQuestions: 1
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -47,7 +47,7 @@ class CreateEventForm extends React.PureComponent {
 
   handleAddQuestionClick() {
     this.setState({ numberOfQuestions: this.state.numberOfQuestions + 1 });
-    console.log(this.state.numberOfQuestions);
+    // console.log(this.state.numberOfQuestions);
   }
 
   render() {
@@ -79,11 +79,9 @@ class CreateEventForm extends React.PureComponent {
               type="text"
               placeholder="Description of the event"
             />
-            {[...Array(this.state.numberOfQuestions)]
-              .map((e, i) => (<AddQuestionComponent
-                addQuestion={this.props.addQuestion}
-                questionNumber={i + 1}
-              />))}
+            {[...Array(this.state.numberOfQuestions)].map((e, i) =>
+              <AddQuestionComponent addQuestion={this.props.addQuestion} questionNumber={i + 1} />
+            )}
             <ActionWrapper>
               <OlButtonFullWidth onClick={this.handleClick}>
                 Create

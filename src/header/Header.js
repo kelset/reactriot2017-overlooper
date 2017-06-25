@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Auth0Lock from 'auth0-lock';
 
 import { setModal, closeModal } from '../modal/modalActions';
-import { createEvent, addQuestion } from '../event/eventActions';
+import { newEvent, addQuestion } from '../event/eventActions';
 import { setUser, login, logout } from '../user/userActions';
 
 import CreateEventForm from '../create-event/CreateEventForm';
@@ -76,11 +76,35 @@ class Header extends React.PureComponent {
       });
   }
 
+  createActualEvent({ owner, title, description, image }) {
+    const { questions } = this.props.event;
+
+    const variables = {
+      ownerId: owner.id,
+      title,
+      description,
+      image,
+      questionsToAsk: questions
+    };
+
+    this.props
+      .createEvent({ variables })
+      .then(() => {
+        this.props.closeModal();
+        this.props.newEvent({ event: variables });
+        this.props.history.replace('/');
+      })
+      .catch((e) => {
+        console.error(e);
+        this.props.history.replace('/');
+      });
+  }
+
   openCreateEventModal() {
     this.props.setModal({
       children: (
         <CreateEventForm
-          createEvent={this.props.createEvent}
+          createEvent={this.createActualEvent.bind(this)}
           addQuestion={this.props.addQuestion}
           currentUser={this.props.user}
         />
@@ -142,12 +166,14 @@ class Header extends React.PureComponent {
 
 Header.propTypes = {
   user: PropTypes.object,
+  event: PropTypes.object,
   data: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   createUser: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   createEvent: PropTypes.func.isRequired,
+  newEvent: PropTypes.func.isRequired,
   addQuestion: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
@@ -155,7 +181,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  event: state.event
 });
 
 const mapDispatchToProps = dispatch =>
@@ -163,7 +190,7 @@ const mapDispatchToProps = dispatch =>
     {
       setModal,
       closeModal,
-      createEvent,
+      newEvent,
       addQuestion,
       setUser,
       login,
@@ -175,6 +202,19 @@ const mapDispatchToProps = dispatch =>
 const createUser = gql`
   mutation ($idToken: String!, $name: String!, $avatar: String!){
     createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, avatar: $avatar) {
+      id
+    }
+  }
+`;
+
+const createEvent = gql`
+  mutation ($ownerId: ID!, $title: String!, $description: String!, $image: String!){
+    createEvent(
+      ownerId: $ownerId,
+      title: $title,
+      description: $description,
+      image: $image,
+    ) {
       id
     }
   }
@@ -198,7 +238,9 @@ const userQuery = gql`
 `;
 
 export default graphql(createUser, { name: 'createUser' })(
-  graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(
-    connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+  graphql(createEvent, { name: 'createEvent' })(
+    graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(
+      connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+    )
   )
 );
