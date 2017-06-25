@@ -10,7 +10,7 @@ import {
   SingleEventDescription,
   SingleEventWrapper,
   SingleEventImage,
-  SingleEventBodyWrapper,
+  SingleEventBodyWrapper
 } from './EventStyles';
 
 import { OlButton } from '../commonUI/OlButton';
@@ -25,7 +25,7 @@ class EventProfile extends React.PureComponent {
       hasEvent: props.hasEvent,
       hasError: false,
       event: props.event,
-      data: {},
+      data: {}
     };
   }
 
@@ -33,8 +33,9 @@ class EventProfile extends React.PureComponent {
     const eventId = this.props.match.params.id;
 
     if (!this.props.hasEvent) {
-      this.props.client.query({
-        query: gql`
+      this.props.client
+        .query({
+          query: gql`
         query AllEventsQuery {
             Event(id: "${eventId}") {
               id,
@@ -53,21 +54,21 @@ class EventProfile extends React.PureComponent {
               }
             }
           }
-      `,
-      })
-      .then((resp) => {
-        console.log('got response', resp);
-        this.setState({ event: resp.data.Event, hasEvent: true });
-      })
-      .catch((err) => {
-        console.error(err);
-        this.setState({ hasError: true });
-      });
+      `
+        })
+        .then((resp) => {
+          console.log('got response', resp);
+          this.setState({ event: resp.data.Event, hasEvent: true });
+        })
+        .catch((err) => {
+          console.error(err);
+          this.setState({ hasError: true });
+        });
     }
   }
 
   render() {
-    const { editMode, event } = this.state;
+    const { event } = this.state;
 
     if (this.state.hasError) {
       return (
@@ -97,9 +98,9 @@ class EventProfile extends React.PureComponent {
           <SingleEventBodyWrapper>
             <SingleEventTitle>{event.title}</SingleEventTitle>
             <SingleEventDescription>{event.description}</SingleEventDescription>
-            { !this.state.currentUserParticipated ?
-              <OlButton>Participate Now</OlButton> :
-              <EventUserList users={event.participants} /> }
+            {!this.state.currentUserParticipated
+              ? <OlButton>Participate Now</OlButton>
+              : <EventUserList users={event.participants} />}
           </SingleEventBodyWrapper>
         </SingleEventWrapper>
       </div>
@@ -111,12 +112,12 @@ EventProfile.propTypes = {
   event: PropTypes.object.isRequired,
   hasEvent: PropTypes.bool.isRequired,
   client: PropTypes.object.isRequired,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   event: state.event,
-  hasEvent: Boolean(state.event.title),
+  hasEvent: Boolean(state.event.title)
 });
 
 export default connect(mapStateToProps)(withApollo(EventProfile));

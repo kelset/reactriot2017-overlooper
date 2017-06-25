@@ -12,29 +12,57 @@ import {
 } from './CreateUserStyles';
 import { OlButtonFullWidth } from '../commonUI/OlButton';
 
-const CreateUserForm = ({ createUser }) =>
-  (<Wrapper>
-    <Title>Complete your Profile</Title>
-    <FormWrapper>
-      <DivWithoutPadding className="col-md-3">
-        <EventImage src="http://placehold.it/300" alt="eventImage" />
-      </DivWithoutPadding>
-      <div className="col-md-9">
-        <InputTitle type="text" placeholder="Your name" />
-        <ActionWrapper>
-          <OlButtonFullWidth
-            onClick={() =>
-              createUser({
-                name: 'test',
-                avatar: 'http://placehold.it/300'
-              })}
-          >
-            Next
-          </OlButtonFullWidth>
-        </ActionWrapper>
-      </div>
-    </FormWrapper>
-  </Wrapper>);
+class CreateUserForm extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      avatar: 'http://placehold.it/300'
+    };
+  }
+
+  handleChange(key) {
+    return (event) => {
+      this.setState({ [key]: event.target.value });
+    };
+  }
+
+  render() {
+    const { createUser } = this.props;
+    const { avatar, name } = this.state;
+
+    return (
+      <Wrapper>
+        <Title>Complete your Profile</Title>
+        <FormWrapper>
+          <DivWithoutPadding className="col-md-3">
+            <EventImage src={avatar} alt="eventImage" />
+          </DivWithoutPadding>
+          <div className="col-md-9">
+            <InputTitle
+              onChange={this.handleChange('name')}
+              value={name}
+              type="text"
+              placeholder="Your name"
+            />
+            <ActionWrapper>
+              <OlButtonFullWidth
+                onClick={() =>
+                  createUser({
+                    name,
+                    avatar
+                  })}
+              >
+                Next
+              </OlButtonFullWidth>
+            </ActionWrapper>
+          </div>
+        </FormWrapper>
+      </Wrapper>
+    );
+  }
+}
+// const CreateUserForm = ({ createUser }) =>
 
 CreateUserForm.propTypes = {
   createUser: PropTypes.func.isRequired
