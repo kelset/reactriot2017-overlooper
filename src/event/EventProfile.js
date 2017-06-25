@@ -31,6 +31,7 @@ class EventProfile extends React.PureComponent {
 
   componentDidMount() {
     const eventId = this.props.match.params.id;
+
     if (!this.props.hasEvent) {
       this.props.client.query({
         query: gql`
