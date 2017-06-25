@@ -63,6 +63,12 @@ class CreateEventForm extends React.PureComponent {
               type="text"
               placeholder="Description of the event"
             />
+            <InputDesc
+              onChange={this.handleChange('img')}
+              value={img}
+              type="text"
+              placeholder="Url of the image for the event"
+            />
             <ActionWrapper>
               <OlButtonFullWidth onClick={this.handleClick}>
                 Create

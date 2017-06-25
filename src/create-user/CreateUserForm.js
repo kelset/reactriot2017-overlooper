@@ -45,6 +45,12 @@ class CreateUserForm extends React.PureComponent {
               type="text"
               placeholder="Your name"
             />
+            <InputTitle
+              onChange={this.handleChange('avatar')}
+              value={avatar}
+              type="text"
+              placeholder="Url of the image for the avatar"
+            />
             <ActionWrapper>
               <OlButtonFullWidth
                 onClick={() =>
