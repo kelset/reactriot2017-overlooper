@@ -23,7 +23,7 @@ import {
 class EventCard extends React.PureComponent {
   navigateToEvent(event) {
     this.props.setEvent(event);
-    this.props.history.push({ pathname: '/event' });
+    this.props.history.push({ pathname: `/event/${event.id}` });
   }
 
   render() {

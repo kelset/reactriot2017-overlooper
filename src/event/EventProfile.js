@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { withApollo, gql } from 'react-apollo';
 
 import {
   SingleEventTitle,
@@ -15,41 +16,62 @@ import {
 import { OlButton } from '../commonUI/OlButton';
 import EventUserList from './EventUserList';
 
-const dummyEvent = {
-  title: 'React Riot',
-  description: `React Riot is an online hackathon.
-Teams of up to 4 people compete over a
-48 hour period to build the best app they can,
-using React JS.`,
-  image: 'http://placehold.it/400',
-  users: [
-    {
-      image: 'http://placehold.it/300',
-      name: '@erdogmusergun',
-    },
-    {
-      image: 'http://placehold.it/400',
-      name: '@kelset',
-    },
-    {
-      image: 'http://placehold.it/300',
-      name: '@ergun1017',
-    }
-  ]
-};
-
 class EventProfile extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       editMode: false,
       currentUserParticipated: true,
+      hasEvent: props.hasEvent,
+      event: props.event,
+      data: {},
     };
   }
 
+  componentDidMount() {
+    const eventId = this.props.match.params.id;
+    if (!this.props.hasEvent) {
+      this.props.client.query({
+        query: gql`
+        query AllEventsQuery {
+            Event(id: "${eventId}") {
+              id,
+              title,
+              startDate,
+              endDate,
+              image,
+              description,
+              owner {
+                id,
+                name
+              },
+              participants {
+                id,
+                name
+              }
+            }
+          }
+      `,
+      })
+      .then((resp) => {
+        console.log('got response', resp);
+        this.setState({ event: resp.data.Event, hasEvent: true });
+      })
+      .catch(err => console.error(err));
+    }
+  }
+
   render() {
-    const { editMode } = this.state;
-    const { event } = this.props;
+    const { editMode, event } = this.state;
+
+    if (!this.state.hasEvent) {
+      return (
+        <SingleEventWrapper>
+          <div> Loading... </div>
+        </SingleEventWrapper>
+      );
+    }
+
     return (
       <div>
         <Helmet>
@@ -64,7 +86,7 @@ class EventProfile extends React.PureComponent {
             <SingleEventDescription>{event.description}</SingleEventDescription>
             { !this.state.currentUserParticipated ?
               <OlButton>Participate Now</OlButton> :
-              <EventUserList users={event.users} /> }
+              <EventUserList users={event.participants} /> }
           </SingleEventBodyWrapper>
         </SingleEventWrapper>
       </div>
@@ -73,11 +95,15 @@ class EventProfile extends React.PureComponent {
 }
 
 EventProfile.propTypes = {
-  event: PropTypes.object.isRequired
+  event: PropTypes.object.isRequired,
+  hasEvent: PropTypes.bool.isRequired,
+  client: PropTypes.object.isRequired,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
-  event: state.event.title ? state.event : dummyEvent,
+  event: state.event,
+  hasEvent: Boolean(state.event.title),
 });
 
-export default connect(mapStateToProps)(EventProfile);
+export default connect(mapStateToProps)(withApollo(EventProfile));

@@ -54,4 +54,4 @@ bindActionCreators(
   dispatch,
 );
 
-export default connect(() => {}, mapDispatchToProps)(EventUserList);
+export default connect(() => ({}), mapDispatchToProps)(EventUserList);
