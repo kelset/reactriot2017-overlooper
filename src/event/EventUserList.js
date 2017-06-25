@@ -2,6 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { setModal } from '../modal/modalActions';
+
+import EventUserModal from './EventUserModal';
+
 import {
   SeekingPeopleImg,
 } from './EventStyles';
@@ -17,19 +23,35 @@ const SeekingPeopleWrapper = styled.div`
   cursor: pointer;
 `;
 
-const EventUserList = ({ users }) =>
-  (
-    <UserListWrapper>
+class EventUserList extends React.PureComponent {
+  openUserModal(user) {
+    this.props.setModal({
+      children: (<EventUserModal user={user} />),
+    });
+  }
+  render() {
+    const { users } = this.props;
+    return (<UserListWrapper>
       { users.map(user => (
-        <SeekingPeopleWrapper key={user.name}>
+        <SeekingPeopleWrapper onClick={() => this.openUserModal(user)} key={user.name}>
           <SeekingPeopleImg src={user.image} alt={user.name} /> { user.name }
         </SeekingPeopleWrapper>
       )) }
-    </UserListWrapper>
-  );
+    </UserListWrapper>);
+  }
+}
 
 EventUserList.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  setModal: PropTypes.func.isRequired,
 };
 
-export default EventUserList;
+const mapDispatchToProps = dispatch =>
+bindActionCreators(
+  {
+    setModal,
+  },
+  dispatch,
+);
+
+export default connect(() => {}, mapDispatchToProps)(EventUserList);
