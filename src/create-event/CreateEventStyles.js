@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { OlButton } from '../commonUI/OlButton';
 
 // Create a Title component that'll render an <h1> tag with some styles
 export const Wrapper = styled.div`
     font-family: Lato;
-    padding: 0 200px;
+    padding: 0 100px;
+    overflow: scroll;
 `;
 
 export const FormWrapper = styled.div`
@@ -17,6 +19,10 @@ export const DivWithoutPadding = styled.div`
 export const Title = styled.h3`
   font-weight: bold;
   font-size: 24px;
+`;
+
+export const SmallTitle = Title.extend`
+  font-size: 16px;
 `;
 
 export const InputTitle = styled.input`
@@ -46,5 +52,13 @@ export const EventImage = styled.img`
 
 export const ActionWrapper = styled.div`
   float: right;
-  width: 100px;
+`;
+
+export const AddQuestionWrapper = styled.div`
+  float: right;
+  margin-right: 5px;
+`;
+
+export const AddQuestionButton = OlButton.extend`
+  background: #4be38a;
 `;

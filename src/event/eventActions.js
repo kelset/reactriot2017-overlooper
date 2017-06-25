@@ -13,10 +13,9 @@ export const createEvent = eventInfo => ({
   image: eventInfo.image,
 });
 
-export const addQuestion = (phrase, detail, questionType, answerOptions) => ({
+export const addQuestion = (questionInfo, index) => ({
   type: ActionTypes.ADD_QUESTION,
-  phrase,
-  detail,
-  questionType,
-  answerOptions
+  phrase: questionInfo.phrase,
+  questionType: questionInfo.questionType,
+  index,
 });

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Auth0Lock from 'auth0-lock';
 
 import { setModal, closeModal } from '../modal/modalActions';
-import { createEvent } from '../event/eventActions';
+import { createEvent, addQuestion } from '../event/eventActions';
 import { setUser, login, logout } from '../user/userActions';
 
 import CreateEventForm from '../create-event/CreateEventForm';
@@ -79,7 +79,11 @@ class Header extends React.PureComponent {
   openCreateEventModal() {
     this.props.setModal({
       children: (
-        <CreateEventForm createEvent={this.props.createEvent} currentUser={this.props.user} />
+        <CreateEventForm
+          createEvent={this.props.createEvent}
+          addQuestion={this.props.addQuestion}
+          currentUser={this.props.user}
+        />
       )
     });
   }
@@ -104,7 +108,7 @@ class Header extends React.PureComponent {
         <HeaderLi>
           {user.auth0IdToken
             ? <FlatOlButton onClick={() => this.openCreateEventModal()}>Create Event</FlatOlButton>
-            : <div />}
+            : <FlatOlButton onClick={() => this.openCreateEventModal()}>Create Event</FlatOlButton>}
         </HeaderLi>
         <LogoHeaderLi>
           <Link to="/"><Logo>{APP_NAME}</Logo></Link>
@@ -141,10 +145,10 @@ Header.propTypes = {
   data: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   createUser: PropTypes.func.isRequired,
-  userQuery: PropTypes.func,
   setModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   createEvent: PropTypes.func.isRequired,
+  addQuestion: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired
@@ -160,6 +164,7 @@ const mapDispatchToProps = dispatch =>
       setModal,
       closeModal,
       createEvent,
+      addQuestion,
       setUser,
       login,
       logout

@@ -24,19 +24,14 @@ const event = (state = initialState, action) => {
         ...state,
         ...action.event
       };
-    case ActionTypes.ADD_QUESTION:
+    case ActionTypes.ADD_QUESTION: {
+      const dummyQuestions = state.questions;
+      dummyQuestions[action.index] = { phrase: action.phrase, questionType: action.questionType };
       return {
         ...state,
-        questions: [
-          ...state.event.questions,
-          {
-            phrase: action.phrase,
-            detail: action.detail,
-            questionType: action.questionType,
-            answerOptions: action.answerOptions
-          }
-        ]
+        questions: dummyQuestions,
       };
+    }
     default:
       return state;
   }

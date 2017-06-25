@@ -1,5 +1,10 @@
 export const APP_NAME = 'Overlooper'; // for now :smile:
 
+export const QuestionTypes = {
+  OPEN_ANSWER: 'Open Answer',
+  YES_NO: 'Yes, No',
+};
+
 export default {
   // MODAL
   SET_MODAL: 'SET_MODAL',
