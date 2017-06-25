@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { ApolloProvider } from 'react-apollo';
@@ -31,9 +31,12 @@ const App = () =>
         <div>
           <CustomModal />
           <Header />
-          <Route exact path="/" component={Events} />
-          <Route path="/user" component={UserProfile} />
-          <Route path="/event" component={EventProfile} />
+          <Switch>
+            <Route exact path="/" component={Events} />
+            <Route path="/user" component={UserProfile} />
+            <Route path="/event/:id" component={EventProfile} />
+            <Route component={Events} />
+          </Switch>
         </div>
       </div>
     </ConnectedRouter>

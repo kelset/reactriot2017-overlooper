@@ -13,7 +13,7 @@ export const SectionTitle = styled.h2`
   padding-bottom: 15px;
 `;
 
-export const Wrapper = styled.div`
+export const CardWrapper = styled.div`
   width: 23%;
   margin: 0 1%;
   border: 1px solid #c1c1c1;
@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
 export const CardImage = styled.img`
   width: 100%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const CardBodyWrapper = styled.div`
@@ -65,4 +66,31 @@ export const ActionContainer = styled.div`
 
 export const FullWidthOlButton = OlButton.extend`
   width: 100%;
+`;
+
+export const SingleEventWrapper = styled.div`
+  width: 50%;
+  height: 500px;
+  margin: 0 25%;
+  background: #fff;
+  border: 1px solid #f5f5f5;
+`;
+
+export const SingleEventImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 300px;
+`;
+
+export const SingleEventBodyWrapper = styled.div`
+  padding: 15px 20px;
+`;
+
+export const SingleEventTitle = Title.extend`
+  font-size: 18px;
+`;
+
+export const SingleEventDescription = Description.extend`
+  font-size: 16px;
 `;
