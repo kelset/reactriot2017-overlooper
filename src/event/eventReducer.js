@@ -25,11 +25,11 @@ const event = (state = initialState, action) => {
         ...action.event
       };
     case ActionTypes.ADD_QUESTION: {
-      const dummyQuestions = state.questions;
+      const dummyQuestions = state.questionsToAsk;
       dummyQuestions[action.index] = { phrase: action.phrase, questionType: action.questionType };
       return {
         ...state,
-        questions: dummyQuestions
+        questionsToAsk: dummyQuestions
       };
     }
     default:
