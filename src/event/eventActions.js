@@ -5,18 +5,18 @@ export const setEvent = event => ({
   event
 });
 
+export const createEvent = (owner, title, description, image) => ({
+  type: ActionTypes.FILL_EVENT_INFORMATION,
+  owner,
+  title,
+  description,
+  image
+});
+
 export const addQuestion = (phrase, detail, questionType, answerOptions) => ({
   type: ActionTypes.ADD_QUESTION,
   phrase,
   detail,
   questionType,
   answerOptions
-});
-
-export const newEvent = (owner, title, description, image) => ({
-  type: ActionTypes.FILL_EVENT_INFORMATION,
-  owner,
-  title,
-  description,
-  image
 });

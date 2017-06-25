@@ -10,7 +10,7 @@ const modal = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.SET_MODAL:
       return {
-        isOpen: false,
+        isOpen: true,
         children: action.children
       };
     case ActionTypes.CLOSE_MODAL:
