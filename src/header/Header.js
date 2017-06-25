@@ -77,21 +77,22 @@ class Header extends React.PureComponent {
   }
 
   createActualEvent({ owner, title, description, image }) {
-    const { questions } = this.props.event;
-
+    const { questionsToAsk } = this.props.event;
+    console.log('questions', questionsToAsk);
     const variables = {
       ownerId: owner.id,
       title,
       description,
       image,
-      questionsToAsk: questions
+      questionsToAsk
     };
+
+    this.props.newEvent({ event: variables });
 
     this.props
       .createEvent({ variables })
       .then(() => {
         this.props.closeModal();
-        this.props.newEvent({ event: variables });
         this.props.history.replace('/');
       })
       .catch((e) => {
@@ -208,12 +209,17 @@ const createUser = gql`
 `;
 
 const createEvent = gql`
-  mutation ($ownerId: ID!, $title: String!, $description: String!, $image: String!){
+  mutation ($ownerId: ID!,
+    $title: String!,
+    $description: String!,
+    $image: String!,
+    $questionsToAsk: [EventquestionsToAskQuestion!]){
     createEvent(
       ownerId: $ownerId,
       title: $title,
       description: $description,
       image: $image,
+      questionsToAsk: $questionsToAsk,
     ) {
       id
     }

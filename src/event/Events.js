@@ -47,9 +47,7 @@ export default graphql(gql`
       questionsToAsk {
         id,
         phrase,
-        questionType {
-          title
-        },
+        questionType,
         answers {
           responseBoolean,
           responseShortText,
