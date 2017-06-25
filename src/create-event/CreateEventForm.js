@@ -51,7 +51,7 @@ class CreateEventForm extends React.Component {
             <OlButtonFullWidth
               onClick={this.handleClick}
             >
-              Next
+              Create
             </OlButtonFullWidth>
           </ActionWrapper>
         </div>
