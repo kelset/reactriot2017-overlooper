@@ -30,7 +30,7 @@ const App = () =>
 
         <div>
           <CustomModal />
-          <Header />
+          <Header user="deneme" />
           <Route exact path="/" component={Events} />
           <Route path="/user" component={UserProfile} />
           <Route path="/event" component={EventProfile} />
