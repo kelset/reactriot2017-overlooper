@@ -3,7 +3,7 @@ import ActionTypes from '../constants';
 const initialState = {
   owner: null,
   title: '',
-  questions: [],
+  questionsToAsk: [],
   participants: [],
   description: '',
   image: 'http://placehold.it/900'
@@ -29,7 +29,7 @@ const event = (state = initialState, action) => {
       dummyQuestions[action.index] = { phrase: action.phrase, questionType: action.questionType };
       return {
         ...state,
-        questions: dummyQuestions,
+        questions: dummyQuestions
       };
     }
     default:

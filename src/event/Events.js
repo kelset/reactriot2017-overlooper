@@ -30,6 +30,21 @@ export default graphql(gql`
       endDate,
       image,
       description,
+      questionsToAsk {
+        id,
+        phrase,
+        questionType {
+          title
+        },
+        answers {
+          responseBoolean,
+          responseShortText,
+          user {
+            id,
+            name
+          }
+        }
+      },
       owner {
         id,
         name

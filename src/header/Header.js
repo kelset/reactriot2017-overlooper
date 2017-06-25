@@ -108,7 +108,7 @@ class Header extends React.PureComponent {
         <HeaderLi>
           {user.auth0IdToken
             ? <FlatOlButton onClick={() => this.openCreateEventModal()}>Create Event</FlatOlButton>
-            : <FlatOlButton onClick={() => this.openCreateEventModal()}>Create Event</FlatOlButton>}
+            : null}
         </HeaderLi>
         <LogoHeaderLi>
           <Link to="/"><Logo>{APP_NAME}</Logo></Link>

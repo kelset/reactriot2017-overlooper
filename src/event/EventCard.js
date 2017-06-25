@@ -27,7 +27,7 @@ class EventCard extends React.PureComponent {
   }
 
   render() {
-    const { event } = this.props;
+    const { event, user } = this.props;
     return (
       <CardWrapper>
         <CardImage
@@ -46,9 +46,11 @@ class EventCard extends React.PureComponent {
             <SeekingPeopleImg src="http://placehold.it/300" alt="user-name" />
             <SeekingPeopleText>and 5 more</SeekingPeopleText>
           </SeekingPeopleContainer>
-          <ActionContainer>
-            <FullWidthOlButton>Participate Now</FullWidthOlButton>
-          </ActionContainer>
+          {user.auth0IdToken
+            ? <ActionContainer>
+              <FullWidthOlButton>Participate Now</FullWidthOlButton>
+            </ActionContainer>
+            : null}
         </CardBodyWrapper>
       </CardWrapper>
     );
@@ -57,12 +59,13 @@ class EventCard extends React.PureComponent {
 
 EventCard.propTypes = {
   event: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   setEvent: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  state
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch =>
