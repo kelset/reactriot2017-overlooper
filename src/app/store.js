@@ -1,10 +1,11 @@
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createHistory from 'history/createBrowserHistory';
 
 import { ApolloClient, createNetworkInterface } from 'react-apollo';
 
-import reducers from './reducers';
+import modal from '../modal/modalReducer';
+import event from '../event/eventReducer';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -26,20 +27,13 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 
-// Add the reducer to your store on the `router` key
-// Also apply our middleware for navigating
-export const store = createStore(
-  combineReducers({
-    ...reducers,
-    apollo: client.reducer(),
-    router: routerReducer
-  }),
-  {}, // initial state
-  compose(
-    applyMiddleware(...middlewares),
-    // If you are using the devToolsExtension, you can add it here also
-    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : f => f
-  )
-);
+const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+
+const reducers = combineReducers({
+  modal,
+  event,
+  apollo: client.reducer(),
+  router: routerReducer
+});
+
+export const store = createStoreWithMiddleware(reducers);

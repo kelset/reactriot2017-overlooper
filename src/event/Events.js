@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { gql, graphql } from 'react-apollo';
 
-import Header from '../app/Header';
 import EventHero from './EventHero';
 import EventList from './EventList';
 import { dummyEvents } from './dummyEvents';
@@ -11,7 +10,6 @@ import { CardListContainer, SectionTitle } from './EventStyles';
 
 const Events = ({ data: { allEvents } }) =>
   (<div>
-    <Header />
     <EventHero />
     <CardListContainer>
       <SectionTitle>Explore</SectionTitle>
@@ -31,7 +29,15 @@ export default graphql(gql`
       startDate,
       endDate,
       image,
-      description
+      description,
+      owner {
+        id,
+        name
+      },
+      participants {
+        id,
+        name
+      }
     }
   }
 `)(Events);

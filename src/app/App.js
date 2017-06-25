@@ -9,11 +9,12 @@ import createHistory from 'history/createBrowserHistory';
 
 import { store, client } from './store';
 
+import Events from '../event/Events';
 import UserProfile from '../user/UserProfile';
 import EventProfile from '../event/EventProfile';
-import Events from '../event/Events';
 
-import './App.css';
+import Header from '../header/Header';
+import CustomModal from '../modal/CustomModal';
 
 const history = createHistory();
 
@@ -28,7 +29,9 @@ const App = () =>
         </Helmet>
 
         <div>
-          <Route path="/" component={Events} />
+          <CustomModal />
+          <Header />
+          <Route exact path="/" component={Events} />
           <Route path="/user" component={UserProfile} />
           <Route path="/event" component={EventProfile} />
         </div>
